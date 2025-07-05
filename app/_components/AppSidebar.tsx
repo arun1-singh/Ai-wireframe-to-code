@@ -11,38 +11,41 @@ import {
     SidebarMenuButton,
     SidebarMenuItem,
 } from "@/components/ui/sidebar"
-import { Calendar, Home, Inbox, Search, Settings } from "lucide-react"
+import { Calendar, CircleDollarSign, Home, Inbox, Paintbrush, Search, Settings } from "lucide-react"
 import Image from 'next/image'
+import { usePathname } from 'next/navigation'
 
 const items = [
     {
-        title: "Home",
-        url: "#",
+        title: "Workspace",
+        url: "/dashboard",
         icon: Home,
     },
     {
-        title: "Inbox",
-        url: "#",
-        icon: Inbox,
+        title: "Design",
+        url: "/designs",
+        icon: Paintbrush,
     },
     {
-        title: "Calendar",
-        url: "#",
-        icon: Calendar,
+        title: "Credits",
+        url: "/credits",
+        icon: CircleDollarSign,
     },
-    {
-        title: "Search",
-        url: "#",
-        icon: Search,
-    },
-    {
-        title: "Settings",
-        url: "#",
-        icon: Settings,
-    },
+    // {
+    //     title: "Search",
+    //     url: "#",
+    //     icon: Search,
+    // },
+    // {
+    //     title: "Settings",
+    //     url: "#",
+    //     icon: Settings,
+    // },
 ]
 
 export function AppSidebar() {
+    const path=usePathname();
+    console.log(path);
     return (
         <Sidebar>
             <SidebarHeader>
@@ -60,8 +63,10 @@ export function AppSidebar() {
                             {items.map((item, index) => (
                                 // <SidebarMenuItem key={item.title} className='p-2'>
                                 //     <SidebarMenuButton asChild className=''>
-                                <a href={item.url} key={index} className='p-2 text-lg flex gap-2 items-center
-                                 hover:bg-gray-100 rounded-lg'>
+                                <a href={item.url} key={index} className={`p-2 text-lg flex gap-2 items-center
+                                 hover:bg-gray-100 rounded-lg
+                                 ${path==item.url&& 'bg-gray-200' }
+                                 `}>
                                     <item.icon className='h-5 w-5' />
                                     <span>{item.title}</span>
                                 </a>
@@ -73,7 +78,7 @@ export function AppSidebar() {
                 </SidebarGroup>
             </SidebarContent>
             <SidebarFooter>
-                <h2 className='p-2 text-gray-400 text-sm'>Copyright @Tubeguruji</h2>
+                <h2 className='p-2 text-gray-400 text-sm'>Copyright @Arun Singh</h2>
             </SidebarFooter>
         </Sidebar>
     )
